@@ -1,0 +1,107 @@
+<h2>{{ section.settings.section_heading }}</h2>
+<div class="carousel slide" data-bs-ride="carousel" id="carouselExampleCaptions">
+	{% if section.settings.show_indicators %}
+		<div class="carousel-indicators">
+			{% for block in section.blocks %}
+				{% if forloop.first %}
+					<button aria-current="true" aria-label="Slide {{ forloop.index }}" class="active" data-bs-slide-to="{{ forloop.index0 }}" data-bs-target="#carouselExampleCaptions" type="button"></button>
+				{% else %}
+					<button aria-label="Slide {{ forloop.index }}" data-bs-slide-to="{{ forloop.index0 }}" data-bs-target="#carouselExampleCaptions" type="button"></button>						
+				{% endif %}
+
+			{% else %}
+				{% for block in (1..2) %}
+					{% if forloop.first %}
+						<button aria-current="true" aria-label="Slide {{ forloop.index }}" class="active" data-bs-slide-to="{{ forloop.index0 }}" data-bs-target="#carouselExampleCaptions" type="button"></button>
+					{% else %}
+						<button aria-label="Slide {{ forloop.index }}" data-bs-slide-to="{{ forloop.index0 }}" data-bs-target="#carouselExampleCaptions" type="button"></button>						
+					{% endif %}
+				{% endfor %}
+			{% endfor %}
+		</div>
+	{% endif %}
+	<div class="carousel-inner">
+		{% for block in section.blocks %}
+			<div class="carousel-item {% if forloop.first %} active {% endif %}">
+				{{ block.settings.slide_image | img_url: 'master' | img_tag: 'Alt Text', 'd-block w-100' }}
+				<div class="carousel-caption d-none d-md-block bg-secondary">
+					<h5 class="display-1 text-white">{{ block.settings.slide_heading }}</h5>
+					<p class="display-6 text-white">{{ block.settings.slide_content }}</p>
+				</div>
+			</div>
+		{% else %}
+			{% for block in (1..2) %}
+				<div class="carousel-item bg-warning {% if forloop.first %} active {% endif %}">
+					{{ 'lifestyle-' | append: forloop.index | placeholder_svg_tag: 'd-block w-100' }}
+					<div class="carousel-caption d-none d-md-block bg-secondary">
+						<h5 class="display-1 text-white">{{ "Slide Title" | append: forloop.index }}</h5>
+						<p class="display-6 text-white">{{ "Slide Content" | append: forloop.index }}</p>
+					</div>
+				</div>
+			{% endfor %}
+		{% endfor %}
+	</div>
+	
+	{% if section.settings.show_arrows %}
+		<button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleCaptions" type="button">
+			<span aria-hidden="true" class="carousel-control-prev-icon"></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleCaptions" type="button">
+			<span aria-hidden="true" class="carousel-control-next-icon"></span>
+			<span class="visually-hidden">Next</span>
+		</button>
+	{% endif %}
+</div>
+
+{% schema %}
+{
+	"name": "Carousel",
+	"tag": "section",
+	"class": "featured-slider",
+	"settings": [
+		{
+			"type": "text",
+			"id": "section_heading",
+			"label": "Section Heading"
+		}, 
+		{
+			"type": "checkbox",
+			"id": "show_arrows",
+			"label": "Show Arrows?"
+		},
+		{
+			"type": "checkbox",
+			"id": "show_indicators",
+			"label": "Show Indicators?"
+		}
+	],
+	"blocks": [
+		{
+			"name": "Slide",
+			"type": "slide",
+			"settings": [
+				{
+					"type": "image_picker",
+					"id": "slide_image",
+					"label": "Slide Image"
+				},
+				{
+					"type": "text",
+					"id": "slide_heading",
+					"label": "Slide Heading",
+					"default": "Slide Title"
+
+				},
+				{
+					"type": "richtext",
+					"id": "slide_content",
+					"label": "Slide Content",
+					"default": "<p>Slide Description</p>"
+				}
+			]
+
+		}
+	]
+}
+{% endschema %}
