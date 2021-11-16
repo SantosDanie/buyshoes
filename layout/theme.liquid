@@ -123,6 +123,8 @@
 
     <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
     {{ "bootstrap.min.css" | asset_url | stylesheet_tag }}
+    {{ "glider.min.css" | asset_url | stylesheet_tag }}
+    {{ "styles-s.css" | asset_url | stylesheet_tag }}
   </head>
 
   <body class="gradient">
@@ -168,6 +170,7 @@
     </script>
 
     {{ 'bootstrap.min.js' | asset_url | script_tag }}
+    {{ 'glider.min.js' | asset_url | script_tag }}
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
       {%- endif -%}

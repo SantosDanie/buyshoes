@@ -1,0 +1,50 @@
+.card img {
+    height: 200px;
+    object-fit: contain;
+}
+
+.glider-next, .glider-prev{
+    position: relative;
+    right: 20px;
+    left: 0;
+}
+
+.buttons {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.item-slide {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.starts svg {
+    width: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.starts {
+    display: flex;
+    justify-content: center;
+}
+
+.testimonial {
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.testimonial img {
+    height: 100px;
+    max-width: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 5px;
+}

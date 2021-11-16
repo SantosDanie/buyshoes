@@ -1,17 +1,93 @@
+<h1 class="text-center py-5">{{ section.settings.heading_collections }}</h1>
 <div class="container">
-	<div class="row">
-		{% for index in (1..2) %}
-			{% for item in (1..6) %}
-				<div class="col-3">
-					<div class="card mb-3" style="width: 18rem;">
-						{{ 'product-' | append: item | placeholder_svg_tag: 'd-block w-100' }}
+	<div class="row {% if section.settings.collections_type == "slider" %} d-none {% endif %}">
+		{% for product in collections[section.settings.feature_collection].products %}
+			<div class="col-3 py-3">
+				<div class="card">
+					{% if product.featured_image != blank %}
+						{{ product.featured_image | img_url: "master" | img_tag }}
+					{% else %}
+						{{ 'product-1' | placeholder_svg_tag: 'd-block w-100' }}
+					{% endif %}
+					<div class="card-body">
+						<h3>{{ product.price }} GTQ</h3>
+						<h5 class="card-title">{{ product.title }}</h5>
+						<a href="{{ product.url }}" class="btn btn-primary">View Product</a>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="glider-contain {% if section.settings.collections_type == "grid" %} d-none {% endif %}">
+		<div class="buttons">
+			<button aria-label="Previous" class="glider-prev">«</button>
+			<button aria-label="Next" class="glider-next">»</button>
+		</div>
+		
+		<div class="glider">
+			{% for product in collections[section.settings.feature_collection].products %}
+				<div class="item-slide">
+					<div class="card">
+						{% if product.featured_image != blank %}
+							{{ product.featured_image | img_url: "master" | img_tag }}
+						{% else %}
+							{{ 'product-1' | placeholder_svg_tag: 'd-block w-100' }}
+						{% endif %}
 						<div class="card-body">
-							<h5 class="card-title">100 Q {{ item }}</h5>
-							<a href="#" class="btn btn-primary">View Product {{ item }}</a>
+							<h3>{{ product.price }} GTQ</h3>
+							<h5 class="card-title">{{ product.title }}</h5>
+							<a href="{{ product.url }}" class="btn btn-primary">View Product</a>
 						</div>
 					</div>
 				</div>
 			{% endfor %}
-		{% endfor %}
+		</div>
+		
+		<div role="tablist" class="dots"></div>
 	</div>
 </div>
+{% javascript %}
+	setInterval(() => {
+		new Glider(document.querySelector('.glider'), {
+			slidesToShow: 4,
+			dots: '.dots',
+			arrows: {
+				prev: '.glider-prev',
+				next: '.glider-next'
+			}
+		});
+	}, 50)
+{% endjavascript %}
+{% schema %}
+{
+	"name": "collection",
+	"class": "collections_grid",
+	"settings": [
+		{
+			"type": "text",
+			"id": "heading_collections",
+			"label": "Heading collections"
+		},
+		{
+			"type": "select",
+			"id": "collections_type",
+			"label": "Select Type - Slider or Grid",
+			"options": [
+				{
+					"label": "Grid",
+					"value": "grid"
+				}, {
+					"label": "Slider",
+					"value": "slider" 
+				}
+			]
+		},
+		{
+			"type": "collection",
+			"id": "feature_collection",
+			"label": "Feature Collections"
+		}
+	]
+
+}
+{% endschema %}
