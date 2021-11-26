@@ -1,0 +1,68 @@
+<div class="container">
+	<div class="row">
+		<div class="col-6">
+			<a href="{{ product.featured_image | img_url: 'master' }}">
+				<img src="{{ product.featured_image | img_url: 'master' }}" class="w-100">
+			</a>
+			<div class="row">
+				{% for image in product.images offset: 1 %}
+					<div class="col">
+						<a href="{{ image | img_url: 'master' }}">
+							<img src="{{ image | img_url: 'master' }}" class="w-100">
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="col-6">
+			<a href="#0" class="badge badge-pill bg-success">{{ product.vendor }}</a>
+			<h3>{{ product.title }}</h3>
+			{% if product.compare_at_price != blank %}
+				<p>Normal Price: <del class="text-muted">{{ product.compare_at_price | money_with_currency }}</del></p>
+			{% else %}
+				<p>{% if product.compare_at_price != blank %} Offer: {% else %} Price: {% endif %} <span class="h3 fw-bold">{{ product.price | money_with_currency }}</span></p>
+			{% endif %}
+			
+			{% form 'product', product %}
+				<select name="id" class="d-{% if product.variants.size > 1 %}block{% else %}none{% endif %}">
+					{% for variant in product.variants %}
+						<option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %}>
+							{{ variant.title }} - {{ variant.price | money }}
+						</option>						
+					{% endfor %}
+				</select>
+
+				<div class="quantity-block">
+					<p>Quantity</p>
+					<div class="input-group">
+						<button type="button" class="btn btn-secondary form-control btn-decrease">-</button>
+						<input type="text" name="quantity" value="1" class="form-control input-group-text"/>
+						<button type="button" class="btn btn-secondary form-control btn-increase">+</button>
+					</div>
+					<div class="input-group">
+						<input type="submit" class="btn btn-outline-success w-100 mt-1 mb-1" value="Add To Cart"/>
+						{{ form | payment_button }}
+					</div>
+				</div>
+			{% endform %}
+			<div class="description-product mt-4">
+				<p>{{ product.description }}</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	let btn_decrease = document.querySelector(".btn-decrease");
+	let btn_increase = document.querySelector(".btn-increase");
+	let quantity 	 = document.querySelector(".input-group-text");
+
+	btn_decrease.addEventListener('click', () => {
+		if(quantity.value > 1) {
+			quantity.value = parseInt(quantity.value) - 1;
+		}
+	});
+	btn_increase.addEventListener('click', () => {
+		quantity.value = parseInt(quantity.value) + 1;
+	});
+</script>

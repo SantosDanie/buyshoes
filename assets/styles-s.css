@@ -3,6 +3,10 @@
     object-fit: contain;
 }
 
+.card {
+    justify-content: center;
+}
+
 .glider-next, .glider-prev{
     position: relative;
     right: 20px;
@@ -47,4 +51,25 @@
     margin-right: auto;
     margin-left: auto;
     margin-top: 5px;
+}
+
+.icon-svg {
+    margin-left: 10px;
+    margin-right: 10px;
+    text-decoration: none;
+}
+.icon-svg svg {
+    font-size: 18px;
+    color: gray;
+    width: 30px;
+    height: 30px;
+}
+
+.footer-menu {
+    padding: 0;
+    margin: 0;
+}
+
+.footer-menu li a {
+    text-decoration: none;
 }

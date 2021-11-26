@@ -1,0 +1,39 @@
+<div class="container mt-5 mb-5">
+    <div class="buttons">
+        <button aria-label="Previous" class="glider-prev">«</button>
+        <button aria-label="Next" class="glider-next">»</button>
+    </div>
+    <div class="slideder-recomended" data-url="/recomendaion/products?section_id={{ section.id }}&product_id={{ product.id }}">
+       {% for item in (1..8) %}
+            <div class="slider-item">
+                <div class="card">
+                    {% if product.featured_image != blank %}
+                        {{ product.featured_image | img_url: "master" | img_tag: '', 'w-100' }}
+                    {% else %}
+                        {{ 'product-1' | placeholder_svg_tag: 'd-block w-100' }}
+                    {% endif %}
+                    <div class="card-body">
+                        <h3>{{ product.price }} GTQ</h3>
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <a href="{{ product.url }}" class="btn btn-primary">View Product</a>
+                    </div>
+                </div>
+            </div>
+       {% endfor %}
+    </div>
+		<div role="tablist" class="dots"></div>
+
+</div>
+
+<script>
+    window.addEventListener("load", () => {
+        new Glider(document.querySelector('.slideder-recomended'), {
+            slidesToShow: 4,
+            dots: '.dots',
+            arrows: {
+                prev: '.glider-prev',
+                next: '.glider-next'
+            }
+        });
+    })
+</script>

@@ -4,15 +4,33 @@
             "type": "buyshoes-carousel"
         },
         "buyshoes_featured_collection": {
-            "type": "buyshoes-feature-collection"
+            "type": "buyshoes-feature-collection",
+            "settings": {
+                "heading_collections": "Colection Heading",
+                "collections_type": "slider",
+                "feature_collection": "all"
+            }
         }, 
-        "testimonials-slide": {
-            "type": "buyshoes-testimonials"
+        "buyshoes_testimonials_slide": {
+            "type": "buyshoes-testimonials",
+            "settings": {
+                "heading_testimonials": "Heading Testimonials",
+                "show_arrows": true,
+                "show_dots": true
+            }
+        },
+        "buyshoes_social_icons": {
+            "type": "buyshoes-social-icons"
+        },
+        "buyshoes_questions": {
+            "type": "buyshoes-question"
         }
     },
     "order": [
         "buyshoes_carousel",
         "buyshoes_featured_collection",
-        "testimonials-slide"
+        "buyshoes_testimonials_slide",
+        "buyshoes_social_icons",
+        "buyshoes_questions"
     ]
 }
