@@ -1,60 +1,68 @@
 <div class="container">
-    <h1 class="display-3 fw-bold">{{ section.settings.section_heading }}</h1>
-    <div class="row mb-5 mt-4">
-        {% for block in section.blocks %}
-            {% case block.type %}
-                {% when "question" %}
-                    <div class="col-12 col-sm-6 col-md-4">
-                        {% unless block.settings.question_url == blank %}
-                            <a href="{{ block.settings.question_url }}">
-                        {% endunless %}
-                        <div class="question bg-light">
-                            {% if block.settings.question_image != blank %}
-                                {{ block.settings.question_image | img_url: 'medium' | img_tag: "", "w-100 ovject-fit-cover" }}
-                            {% else %}
-                                {{ 'lifestyle-1' | placeholder_svg_tag }}
-                            {% endif %}
-                        </div>
-                        {% unless block.settings.question_url == blank %}
-                            </a>
-                        {% endunless %}
-                    </div>
-                {% else %}
-                    
-            {% endcase %}
-        {% endfor %}
-    </div>
+	<h1 class="display-3 fw-bold">{{ section.settings.section_heading }}</h1>
+	<div class="row mb-5 mt-4">
+		{% if section.blocks.size > 0 %}
+			{% for block in section.blocks %}
+				{% case block.type %}
+					{% when "question" %}
+						<div class="col-12 col-sm-6 col-md-4">
+							{% unless block.settings.question_url == blank %}
+								<a href="{{ block.settings.question_url }}">
+							{% endunless %}
+							<div class="question bg-light">
+								{% if block.settings.question_image != blank %}
+									{{ block.settings.question_image | img_url: 'medium' | img_tag: "", "w-100 object-fit-cover" }}
+								{% else %}
+									{{ 'lifestyle-1' | placeholder_svg_tag }}
+								{% endif %}
+							</div>
+							{% unless block.settings.question_url == blank %}
+								</a>
+							{% endunless %}
+						</div>
+				{% endcase %}
+			{% endfor %}
+		{% else %}
+			{% for item in (1..3) %}
+				<div class="col-12 col-sm-6 col-md-4">
+					<div class="question bg-light">
+						{{ 'product-2' | placeholder_svg_tag }}
+					</div>
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>
 </div>
 
 {% schema %}
 {
-    "name": "FAQs",
-    "tag": "section",
-    "settings": [
-        {
-            "type": "text",
-            "id": "section_heading",
-            "label": "Section Heading",
-            "default": "FAQs Default"
-        }
-    ],
-    "blocks": [
-        {
-            "name": "Question",
-            "type": "question",
-            "settings": [
-                {
-                    "type": "image_picker",
-                    "id": "question_image",
-                    "label": "Image"
-                },
-                {
-                    "type": "url",
-                    "id": "question_url",
-                    "label": "Question URL"
-                }
-            ] 
-        }
-    ]
+	"name": "FAQs",
+	"tag": "section",
+	"settings": [
+		{
+			"type": "text",
+			"id": "section_heading",
+			"label": "Section Heading",
+			"default": "FAQs Default"
+		}
+	],
+	"blocks": [
+		{
+			"name": "Question",
+			"type": "question",
+			"settings": [
+				{
+					"type": "image_picker",
+					"id": "question_image",
+					"label": "Image"
+				},
+				{
+					"type": "url",
+					"id": "question_url",
+					"label": "Question URL"
+				}
+			] 
+		}
+	]
 }
 {% endschema %}

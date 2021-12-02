@@ -1,14 +1,14 @@
 <div class="container">
-	<div class="row">
+	<div class="row mt-4">
 		<div class="col-6">
-			<a href="{{ product.featured_image | img_url: 'master' }}">
+			<a href="{{ product.featured_image | img_url: 'master' }}" data-lightbox="product-image" data-title="{{ product.title }}">
 				<img src="{{ product.featured_image | img_url: 'master' }}" class="w-100">
 			</a>
-			<div class="row">
+			<div class="row mt-5">
 				{% for image in product.images offset: 1 %}
 					<div class="col">
-						<a href="{{ image | img_url: 'master' }}">
-							<img src="{{ image | img_url: 'master' }}" class="w-100">
+						<a href="{{ image | img_url: 'master' }}" data-lightbox="product-image" data-title="{{ product.title }}">
+							<img src="{{ image | img_url: 'master' }}" class="w-100 img-thumbnail">
 						</a>
 					</div>
 				{% endfor %}
@@ -24,7 +24,7 @@
 			{% endif %}
 			
 			{% form 'product', product %}
-				<select name="id" class="d-{% if product.variants.size > 1 %}block{% else %}none{% endif %}">
+				<select name="id">
 					{% for variant in product.variants %}
 						<option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %}>
 							{{ variant.title }} - {{ variant.price | money }}
@@ -57,12 +57,6 @@
 	let btn_increase = document.querySelector(".btn-increase");
 	let quantity 	 = document.querySelector(".input-group-text");
 
-	btn_decrease.addEventListener('click', () => {
-		if(quantity.value > 1) {
-			quantity.value = parseInt(quantity.value) - 1;
-		}
-	});
-	btn_increase.addEventListener('click', () => {
-		quantity.value = parseInt(quantity.value) + 1;
-	});
+	btn_decrease.addEventListener('click', () => { if(quantity.value > 1) { quantity.value = parseInt(quantity.value) - 1; } });
+	btn_increase.addEventListener('click', () => { quantity.value = parseInt(quantity.value) + 1; });
 </script>

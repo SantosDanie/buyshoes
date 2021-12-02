@@ -1,39 +1,66 @@
 <div class="container mt-5 mb-5">
-    <div class="buttons">
-        <button aria-label="Previous" class="glider-prev">«</button>
-        <button aria-label="Next" class="glider-next">»</button>
-    </div>
-    <div class="slideder-recomended" data-url="/recomendaion/products?section_id={{ section.id }}&product_id={{ product.id }}">
-       {% for item in (1..8) %}
-            <div class="slider-item">
-                <div class="card">
-                    {% if product.featured_image != blank %}
-                        {{ product.featured_image | img_url: "master" | img_tag: '', 'w-100' }}
-                    {% else %}
-                        {{ 'product-1' | placeholder_svg_tag: 'd-block w-100' }}
-                    {% endif %}
-                    <div class="card-body">
-                        <h3>{{ product.price }} GTQ</h3>
-                        <h5 class="card-title">{{ product.title }}</h5>
-                        <a href="{{ product.url }}" class="btn btn-primary">View Product</a>
-                    </div>
-                </div>
-            </div>
-       {% endfor %}
-    </div>
+	<div class="product-recommendations" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}">
+		<div class="buttons">
+			<button aria-label="Previous" class="glider-prev">«</button>
+			<button aria-label="Next" class="glider-next">»</button>
+		</div>
+		<div class="slideder-recomended">
+			{% if recommendations.performed and recommendations.products_count > 0 %}
+				{% for product in recommendations.products %}
+					<div class="slider-item">
+						<div class="card">
+							{% if product.featured_image != blank %}
+								{{ product.featured_image | img_url: "master" | img_tag: '', 'w-100' }}
+							{% else %}
+								{{ 'product-1' | placeholder_svg_tag: 'd-block w-100' }}
+							{% endif %}
+							<div class="card-body">
+								<h3>{{ product.price | money_with_currency }}</h3>
+								<h5 class="card-title">{{ product.title }}</h5>
+								<a href="{{ product.url }}" class="btn btn-primary">View Product</a>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			{% endif %}
+		</div>
 		<div role="tablist" class="dots"></div>
-
+	</div>
 </div>
 
 <script>
-    window.addEventListener("load", () => {
-        new Glider(document.querySelector('.slideder-recomended'), {
-            slidesToShow: 4,
-            dots: '.dots',
-            arrows: {
-                prev: '.glider-prev',
-                next: '.glider-next'
-            }
-        });
-    })
+	window.addEventListener("load", () => {
+		const handleIntersection = (entries, observer) => {
+			if(!entries[0].isIntersecting) return;
+
+			observer.unobserve(productRecommendationsSection);
+			const url = productRecommendationsSection.dataset.url;
+
+			fetch(url)
+			.then(response => response.text())
+			.then(text => {
+				const html = document.createElement('div');
+				html.innerHTML = text;
+				const recommendations = html.querySelector('.product-recommendations');
+				if(recommendations && recommendations.innerHTML.trim().length) {
+					productRecommendationsSection.innerHTML = recommendations.innerHTML;
+					new Glider(document.querySelector('.slideder-recomended'), {
+						slidesToShow: 4,
+						dots: '.dots',
+						arrows: {
+							prev: '.glider-prev',
+							next: '.glider-next'
+						}
+					});
+				}
+			})
+			.catch(e => {
+				console.log(e);
+			})
+		}
+
+		const productRecommendationsSection = document.querySelector('.product-recommendations');
+		const observer = new IntersectionObserver(handleIntersection, {rootMargin: '0px 0px 200px 0px'});
+		observer.observe(productRecommendationsSection);
+	});
 </script>

@@ -29,8 +29,8 @@
     "order": [
         "buyshoes_carousel",
         "buyshoes_featured_collection",
+        "buyshoes_questions",
         "buyshoes_testimonials_slide",
-        "buyshoes_social_icons",
-        "buyshoes_questions"
+        "buyshoes_social_icons"
     ]
 }

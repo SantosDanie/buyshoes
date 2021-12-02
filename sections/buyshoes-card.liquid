@@ -1,0 +1,93 @@
+<div class="container">
+	<div class="row mt-5">
+		<div class="col-12">
+			<h5 class="text-center display-6 mb-5">{{ section.settings.section_heading }}</h5>
+		</div>
+	</div>
+	<form action="{{ routes.cart_url }}" method="POST" class="mb-5">
+		<div class="row">
+			<div class="col-12">
+				<div class="product-table-wrapper shadow py-5 px-3 raunded-3">
+					<table class="table table-striped table-hover align-middle">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Product</th>
+								<th>Price</th>
+								<th>Quantity</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for item in cart.items %}
+								<tr>
+									<th scope="row">{{ forloop.index }}</th>
+									<td>
+										<div class="product d-flex" style="width: 100px;">
+											{{ item.image | img_url: "master" | img_tag: '', 'img-thumbnail' }}
+											<a href="{{ item.url }}" class="ms-2"><h6>{{ item.title }}</h6></a>
+										</div>
+									</td>
+									<td>{{ item.final_price | money_with_currency }}</td>
+									<td>
+										<div class="input-group" style="max-width: 150px;">
+											<button type="button" class="btn btn-secondary form-control btn-decrease">-</button>
+											<input type="text" name="update[]" value="{{ item.quantity }}" class="form-control input-group-text quantity">
+											<button type="button" class="btn btn-secondary form-control btn-increase">+</button>
+										</div>
+									</td>
+									<td>{{ item.final_line_price | money_with_currency }}</td>
+									<td><a href="{{ item.url_to_remove }}" class="text-danger"><svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M268 416h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12zM432 80h-82.41l-34-56.7A48 48 0 0 0 274.41 0H173.59a48 48 0 0 0-41.16 23.3L98.41 80H16A16 16 0 0 0 0 96v16a16 16 0 0 0 16 16h16v336a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128h16a16 16 0 0 0 16-16V96a16 16 0 0 0-16-16zM171.84 50.91A6 6 0 0 1 177 48h94a6 6 0 0 1 5.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12z"></path></svg></a></td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="col-auto ms-auto">
+				<div class="product-ctas mt-4">
+					<p class="fs-5">Total Amount <span class="fs-4 fw-bold">{{ cart.total_price | money_with_currency }}</span></p>
+					<input type="submit" value="Update Cart" class="btn btn-outline-success w-100 mt-1">
+					<input type="submit" value="checkout" name="checkout" class="btn btn-primary w-100 mt-1">
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<script>
+	let btnsDecrease = document.querySelectorAll('.btn-decrease');
+	let btnsIncrease = document.querySelectorAll('.btn-increase');
+	let quantity = document.querySelector('.quantity');
+
+	for (let i = 0; i < btnsDecrease.length; i++) {
+		let btnDecrease = btnsDecrease[i];
+		btnDecrease.addEventListener('click', function() {
+			if(btnDecrease.nextElementSibling.value > 1) {
+				btnDecrease.nextElementSibling.value = parseInt(btnDecrease.nextElementSibling.value) - 1;
+			}
+		});
+	}
+
+	for (let i = 0; i < btnsIncrease.length; i++) {
+		let btnIncrease = btnsIncrease[i];
+		btnIncrease.addEventListener('click', function() {
+			btnIncrease.previousElementSibling.value = parseInt(btnIncrease.previousElementSibling.value) + 1;
+		});
+	}
+</script>
+
+{% schema %}
+{
+	"name": "Main Cart",
+	"tag": "section",
+	"settings": [
+		{
+			"type": "text",
+			"id": "section_heading",
+			"label": "Section Heading",
+			"default": "Shopify Cart"
+		}
+	]
+}
+{% endschema %}
