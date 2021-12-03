@@ -1,14 +1,14 @@
 {
-  "sections": {
-    "banner": {
-      "type": "main-collection-banner"
+	"sections": {
+        "hero": {
+            "type": "buyshoes-collection-hero"
+        },
+        "products": {
+            "type": "buyshoes-collection"
+        }
     },
-    "product-grid": {
-      "type": "main-collection-product-grid"
-    }
-  },
-  "order": [
-    "banner",
-    "product-grid"
-  ]
+    "order": [
+        "hero",
+        "products"
+    ]
 }

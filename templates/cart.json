@@ -2,9 +2,13 @@
 	"sections": {
 		"main_items": {
 			"type": "buyshoes-card"
+		},
+		"recomended": {
+			"type": "recomended"
 		}
 	},
 	"order": [
-		"main_items"
+		"main_items",
+		"recomended"
 	]
 }

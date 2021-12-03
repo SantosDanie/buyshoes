@@ -1,0 +1,90 @@
+<section class="featured-collection-grid section-padding">
+	<div class="container">
+		<div class="collection-filters">
+			<div class="sortby">
+				<div class="row">
+					<div class="col-auto">
+						<div class="input-group  mb-3">
+							<label class="input-group-text" for="inputGroupSelect01">Sort By</label>
+							<select class="form-select" id="inputGroupSelect01">
+								{%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+								{% for option in collection.sort_options %}
+									<option value="{{ option.value }}" {% if sort_by == option.value %}selected="selected"{% endif %}>{{ option.name }}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			{% paginate collection.products by 8 %}
+				{% for product in collection.products %}
+					<div class="col-12 col-ms-6 col-md-4 col-lg-3 mb-3">
+						<div class="card">
+							{% if product.featured_image != blank %}
+								{{ product.featured_image | img_url: "master" | img_tag }}
+							{% else %}
+								{{ 'product-1' | placeholder_svg_tag: 'd-block w-100' }}
+							{% endif %}
+							<div class="card-body">
+								<h3>{{ product.price }} GTQ</h3>
+								<h5 class="card-title">{{ product.title }}</h5>
+								<a href="{{ product.url }}" class="btn btn-primary">View Product</a>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+
+				{% if paginate.pages > 1 %}
+					<div class="collection-pagination d-flex justify-content-center mt-5">
+						<nav arial-label="Page navigation example">
+							<ul class="pagination">
+								{% if paginate.previus.is_link %}
+									<li class="page-item"><a class="page-link" href="{{ paginate.previous.url }}">previus</a></li>
+								{% else %}
+									<li class="page-item"><span class="page-link">previus</span></li>
+								{% endif %}
+
+								{% for part in paginate.parts %}
+									{% if part.is_link %}
+										<li class="page-item"><a class="page-link" href="{{ part.url }}">{{ part.title }}</a></li>
+									{% else %}
+										<li class="page-item active"><span class="page-link">{{ part.title }}</span></li>
+									{% endif %}
+								{% endfor %}
+
+								{% if paginate.next.is_link %}
+									<li class="page-item"><a class="page-link" href="{{ paginate.next.url }}">Next</a></li>
+								{% else %}
+									<li class="page-item"><span class="page-link">Next</span></li>
+								{% endif %}
+							</ul>
+						</nav>
+					</div>
+				{% endif %}
+			{% endpaginate %}
+		</div>
+	</div>
+</section>
+
+<script>
+	urlParams = {};
+
+	if(location.search.length) {
+		let params = location.search.substr(1).split('&');
+		for (let i = 0; i < params.length; i++) {
+			let keyValue = params[i].split('=');
+			
+			if(keyValue.length) {
+				urlParams[decodeURIComponent(keyValue[0])] = decodeURIComponent(keyValue[1]);
+			}
+		}
+	}
+
+	document.querySelector(".form-select").addEventListener('change', function(e) {
+		let value = e.target.value;
+		urlParams.sort_by = value;
+		location.search = new URLSearchParams(urlParams).toString();
+	});
+</script>
