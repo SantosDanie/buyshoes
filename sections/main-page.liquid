@@ -1,22 +1,21 @@
-<link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
-
-<noscript>{{ 'section-main-page.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
-
-<div class="page-width page-width--narrow">
-  <h1 class="main-page-title page-title h0">
-    {{ page.title | escape }}
-  </h1>
-  <div class="rte">
-    {{ page.content }}
-  </div>
+<div class="container mt-5 mb-4">
+	<div class="p-5 bg-secondary rounded-3">
+		<div class="container-fluid py-5 text-center">
+			<h1 class="display-1 fw-bold text-white">{{ page.title | escape }}</h1>
+			<hr class="my-4"/>
+		</div>
+	</div>
+	<div class="row mt-5 pt-5">
+		<div class="col-12">
+			{{ page.content }}
+		</div>
+	</div>
 </div>
 
 {% schema %}
 {
-  "name": "t:sections.main-page.name",
-  "tag": "section",
-  "class": "spaced-section"
+	"name": "t:sections.main-page.name",
+	"tag": "section",
+	"class": "spaced-section"
 }
 {% endschema %}
