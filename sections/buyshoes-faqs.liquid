@@ -1,1 +1,63 @@
-asdfasdfasd
+<div class="container mt-5 mb-4">
+	<div class="p-5 bg-secondary rounded-3">
+		<div class="container-fluid py-5 text-center">
+			<h1 class="display-1 fw-bold text-white">{{ page.title | escape }}</h1>
+			<hr class="my-4"/>
+		</div>
+	</div>
+	<div class="row mt-5 pt-5">
+		<div class="col-12">
+			{{ page.content }}
+		</div>
+	</div>
+
+	<div class="row my-5 py-5">
+		<div class="col-12">
+			<div class="accordion" id="accordionExample">
+				{% if section.blocks.size > 0 %}
+					{% for block in section.blocks %}
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="heading-{{ forloop.index }}">
+								<button class="accordion-button {% unless forloop.first %}collapsed{% endunless %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ forloop.index }}" aria-expanded="true" aria-controls="collapseOne">
+									{{ block.settings.question }}
+								</button>
+							</h2>
+							<div id="collapse-{{ forloop.index }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" aria-labelledby="heading-{{ forloop.index }}" data-bs-parent="#accordionExample">
+								<div class="accordion-body">
+									{{ block.settings.answer }}
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+
+{% schema %}
+{
+	"name": "Frequently Asked Q",
+	"tag": "section",
+	"blocks": [
+		{
+			"name": "FAQ",
+			"type": "faq",
+			"settings": [
+				{
+					"type": "text",
+					"id": "question",
+					"label": "Question",
+					"default": "Question Number 1"
+				},
+				{
+					"type": "richtext",
+					"id": "answer",
+					"label": "Answer",
+					"default": "<p>This is the second item's accordion body. It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element.</p>"
+				}
+			]
+		}
+	]
+}
+{% endschema %}
