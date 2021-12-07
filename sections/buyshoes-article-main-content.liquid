@@ -6,7 +6,7 @@
 				#{{ tag | append: ',' }}
 			{% endfor %}
 		{% when "article_comments" %}
-			{% if article.comments_enambled? %}
+			{% if article.comments_enabled? %}
 				<div class="col-12 my-5">
 					<h3>{{ article.comments_count }} Comments</h3>
 					{% paginate article.comments by 5 %}
