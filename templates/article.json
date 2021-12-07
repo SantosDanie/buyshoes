@@ -2,7 +2,31 @@
 	"layout": "article-with-sidebar",
 	"sections": {
 		"article_content": {
-			"type": "buyshoes-article-main-content"
+			"type": "buyshoes-article-main-content",
+			"blocks": {
+				"article_content": {
+					"type": "article_content"
+				},
+				"article_share_buttons": {
+					"type": "article_share_buttons"
+				},
+				"article_comments": {
+					"type": "article_comments"
+				}				,
+				"article_comments_form": {
+					"type": "article_comments_form"
+				},
+				"blog_page_button": {
+					"type": "blog_page_button"
+				}
+			},
+			"order": [
+				"article_content",
+				"article_share_buttons",
+				"article_comments",
+				"article_comments_form",
+				"blog_page_button"
+			]
 		},
 		"sidebar": {
 			"type": "buyshoes-article-sidebar",
