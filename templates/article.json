@@ -1,55 +1,81 @@
 {
-	"layout": "article-with-sidebar",
-	"sections": {
-		"article_content": {
-			"type": "buyshoes-article-main-content",
-			"blocks": {
-				"article_content": {
-					"type": "article_content"
-				},
-				"article_share_buttons": {
-					"type": "article_share_buttons"
-				},
-				"article_comments": {
-					"type": "article_comments"
-				}				,
-				"article_comments_form": {
-					"type": "article_comments_form"
-				},
-				"blog_page_button": {
-					"type": "blog_page_button"
-				}
-			},
-			"order": [
-				"article_content",
-				"article_share_buttons",
-				"article_comments",
-				"article_comments_form",
-				"blog_page_button"
-			]
-		},
-		"sidebar": {
-			"type": "buyshoes-article-sidebar",
-			"blocks": {
-				"sidebar_image": {
-					"type": "sidebar_image"
-				},
-				"sidebar_title": {
-					"type": "heading_title"
-				},
-				"sidebar_content": {
-					"type": "sidebar_description"
-				}
-			},
-			"block_order": [
-				"sidebar_image",
-				"sidebar_title",
-				"sidebar_content"
-			]
-		}
-	},
-	"order": [
-		"article_content",
-		"sidebar"
-	]
+  "layout": "article-with-sidebar",
+  "sections": {
+    "article_content": {
+      "type": "buyshoes-article-main-content",
+      "blocks": {
+        "dde9968c-5048-4b87-adde-e5de733f5f02": {
+          "type": "article_content",
+          "settings": {
+          }
+        },
+        "93678ac9-baeb-49e0-aaa1-8de556ef8a1c": {
+          "type": "article_share_buttons",
+          "settings": {
+            "facebook": true,
+            "twitter": true,
+            "linkedin": true,
+            "email": true
+          }
+        },
+        "b912197f-8346-46e8-8967-732a5b1b5a3a": {
+          "type": "article_comments",
+          "settings": {
+          }
+        },
+        "3eeb8946-af31-4fac-997f-4ebfa91ad76f": {
+          "type": "article_comments_form",
+          "settings": {
+          }
+        },
+        "5daae852-8604-4def-a51c-e5abf5c08035": {
+          "type": "blog_page_button",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "dde9968c-5048-4b87-adde-e5de733f5f02",
+        "93678ac9-baeb-49e0-aaa1-8de556ef8a1c",
+        "b912197f-8346-46e8-8967-732a5b1b5a3a",
+        "3eeb8946-af31-4fac-997f-4ebfa91ad76f",
+        "5daae852-8604-4def-a51c-e5abf5c08035"
+      ],
+      "settings": {
+      }
+    },
+    "sidebar": {
+      "type": "buyshoes-article-sidebar",
+      "blocks": {
+        "sidebar_image": {
+          "type": "sidebar_image",
+          "settings": {
+          }
+        },
+        "sidebar_title": {
+          "type": "heading_title",
+          "settings": {
+            "sidebar_title_field": "Sidebar Title"
+          }
+        },
+        "sidebar_content": {
+          "type": "sidebar_description",
+          "settings": {
+            "sidebar_description_field": "<p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "sidebar_image",
+        "sidebar_title",
+        "sidebar_content"
+      ],
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "article_content",
+    "sidebar"
+  ]
 }
