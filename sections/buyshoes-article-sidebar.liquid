@@ -1,0 +1,58 @@
+{% for block in section.blocks %}
+	{% case block.type %}
+		{% when "heading_title" %}
+			<h4>{{ block.settings.sidebar_title_field }}</h4>
+		{% when "sidebar_description" %}
+			<p>{{ block.settings.sidebar_description_field }}</p>
+		{% when "sidebar_image" %}
+			{% if block.settings.sidebar_image_field %}
+				{{ block.settings.sidebar_image_field | img_url: "master" | img_tag: '', 'w-100' }}
+			{% else %}
+				{{ "product-1" | placeholder_svg_tag }}
+			{% endif %}
+	{% endcase %}
+{% endfor %}
+
+{% schema %}
+{
+	"name": "Article Sidebar",
+	"class": "col-12 col-md-4 col-lg-3",
+	"blocks": [
+		{
+			"name": "Heading",
+			"type": "heading_title",
+			"settings": [
+				{
+					"type": "text",
+					"id": "sidebar_title_field",
+					"label": "Sidebar title",
+					"default": "Sidebar Title"
+				}
+			]
+		},
+		{
+			"name": "Text block",
+			"type": "sidebar_description",
+			"settings": [
+				{
+					"type": "richtext",
+					"id": "sidebar_description_field",
+					"label": "Description",
+					"default": "<p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T.</p>"
+				}
+			]
+		},
+		{
+			"name": "Image",
+			"type": "sidebar_image",
+			"settings": [
+				{
+					"type": "image_picker",
+					"id": "sidebar_image_field",
+					"label": "Sidebar Image"
+				}
+			]
+		}
+	]
+}
+{% endschema %}

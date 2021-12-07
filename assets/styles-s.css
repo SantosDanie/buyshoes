@@ -73,3 +73,12 @@
 .footer-menu li a {
     text-decoration: none;
 }
+
+.article-image {
+    width: 100%;
+    object-fit: cover !important;
+}
+
+.social-sharing-icons { display: flex; margin-top: 20px; margin-bottom: 20px; }
+.social-sharing-icons a { min-width: 25px; margin-left: 10px; margin-right: 10px; }
+.social-sharing-icons a svg { color: gray; }
