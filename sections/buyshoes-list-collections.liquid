@@ -1,0 +1,22 @@
+<section class="mt-4">
+	<div class="container">
+		<div class="row" data-masonry="{&quot;percentPosition&quot;: true }">
+			{% for collection in collections %}
+				<div class="col-12 col-sm-6 col-md-3 col-lg-3 mb-4">
+					<div class="card card-masory">
+						<a href="{{ collection.url }}">
+							{% if collection.image %}
+								{{ collection.image | img_url: 'master' | img_tag: "", "card-img-top" }}
+							{% else %}
+								{{ collection.products.fisrt.image | img_url: 'master' | img_tag: "", "card-img-top" }}		
+							{% endif %}
+						</a>
+						<div class="card-body">
+							<a href="{{ collection.url }}">{{ collection.title }}</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>

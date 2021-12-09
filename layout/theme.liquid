@@ -102,6 +102,9 @@
       }
     </script>
 
+    {{ 'masonry.pkgd.min.js' | asset_url | script_tag }}
+    {{ 'masonry.pkgd.js'| asset_url | script_tag }}
+    
     {{ 'bootstrap.min.js' | asset_url | script_tag }}
     {{ 'lightbox-plus-jquery.js' | asset_url | script_tag }}
     {{ 'glider.min.js' | asset_url | script_tag }}

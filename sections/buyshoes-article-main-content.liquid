@@ -3,7 +3,7 @@
 		{% when "article_content" %}
 			{{ article.content }}
 			{% for tag in article.tags %}
-				#{{ tag | append: ',' }}
+				#{{ tag | link_to_tag: tag | append: ',' }}
 			{% endfor %}
 		{% when "article_comments" %}
 			{% if article.comments_enabled? %}

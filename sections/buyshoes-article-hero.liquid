@@ -4,8 +4,8 @@
             <div class="container-fluid py-5 text-center">
                 <h1 class="display-1 fw-bold text-white">{{ article.title }}</h1>
                 <hr class="my-4"/>
-                <p class="col-md-8 fs-6 mx-auto text-white">By <strong>{{ article.author }}</strong> Published on <em>{{ article.published_at | date: "%a, %b %d, %y" }}</em></p>
+                <p class="col-md-8 fs-6 mx-auto text-white">By <strong>{{ article.author | link_to_tag: article.author  }}</strong> Published on <em>{{ article.published_at | date: "%a, %b %d, %y" }}</em></p>
             </div>
         </div>
     </div>
-</div> 
+</div>

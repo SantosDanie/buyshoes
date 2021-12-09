@@ -1,35 +1,41 @@
 <header class="bg-dark">
 	<div class="container">
-		<nav class="navbar navbar-expand-lg navbar-dark">
-			<a class="navbar-brand" href="#">Brand</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"  aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="main_nav">
-				<ul class="navbar-nav">
-					{% for link in linklists.main-menu.links %}
-						<li class="nav-item {% if link.links.size > 0 %} dropdown {% endif %}">
-							<a class="nav-link {% if link.links.size > 0 %} dropdown-toggle {% endif %}" href="{{ link.url }}" {% if link.links.size > 0 %} data-bs-toggle="dropdown" {% endif %}>{{ link.title }}</a>
-							{% if link.links.size > 0 %}
-								<ul class=" dropdown-menu">
-									{% for link_child in link.links %}
-										<li class="nav-item"><a class="dropdown-item {% if link_child.links.size > 0 %} dropdown-toggle {% endif %}" href="{{ link_child.url }}">{{ link_child.title }}</a>
-											{% if link_child.links.size > 0 %}
-												<ul class="submenu dropdown-menu">
-													{% for item in link_child.links %}
-														<li><a class="dropdown-item" href="{{ item.url }}">{{ item.title }}</a></li>
-													{% endfor %}
-												</ul>
-											{% endif %}
-										</li>
-									{% endfor %}
-								</ul>
-							{% endif %}
-						</li>
-					{% endfor %}
-				</ul>
-			</div>
-		</nav>
+		<div class="d-flex flex-wrap align-items-center justify-content-between">
+			<nav class="navbar navbar-expand-lg navbar-dark">
+				<a class="navbar-brand" href="#">Brand</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"  aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="main_nav">
+					<ul class="navbar-nav">
+						{% for link in linklists.main-menu.links %}
+							<li class="nav-item {% if link.links.size > 0 %} dropdown {% endif %}">
+								<a class="nav-link {% if link.links.size > 0 %} dropdown-toggle {% endif %}" href="{{ link.url }}" {% if link.links.size > 0 %} data-bs-toggle="dropdown" {% endif %}>{{ link.title }}</a>
+								{% if link.links.size > 0 %}
+									<ul class=" dropdown-menu">
+										{% for link_child in link.links %}
+											<li class="nav-item"><a class="dropdown-item {% if link_child.links.size > 0 %} dropdown-toggle {% endif %}" href="{{ link_child.url }}">{{ link_child.title }}</a>
+												{% if link_child.links.size > 0 %}
+													<ul class="submenu dropdown-menu">
+														{% for item in link_child.links %}
+															<li><a class="dropdown-item" href="{{ item.url }}">{{ item.title }}</a></li>
+														{% endfor %}
+													</ul>
+												{% endif %}
+											</li>
+										{% endfor %}
+									</ul>
+								{% endif %}
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</nav>
+			<form action="{{ routes.search_url }}" class="d-flex">
+				<input type="search" class="form-control me-2" name="q" value="{{ search.terms | escape }}" placeholder="Search" aria-label="Search">
+				<button type="submit" class="btn btn-outline-primary">Search</button>
+			</form>
+		</div>
 	</div>
 </header>
 
