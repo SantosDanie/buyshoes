@@ -1,0 +1,45 @@
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-8 mx-auto">
+				{% unless shop.password_message == blank %}
+					<div class="message p-3 bg-light border border-danger">
+						<h1>{{ shop.password_message }}</h1>
+					</div>
+				{% endunless %}
+
+				<div class="password_form pt-5">
+					{% form "storefront_password" %}
+						{{ form_errors | default_errors }}
+						<div class="form-floating mb-3">
+							<input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+							<label for="floatingPassword">Password</label>
+						</div>
+
+						<div class="submit">
+							<input class="btn btn-primary" type="submit" value="Enter Site">
+						</div>
+					{% endform %}
+				</div>
+
+				<div class="email-signup-form pt-5">
+					{% form "customer" %}
+						{{ form_errors | default_errors }}
+						<div class="tags">
+							<input type="hidden" name="contact[tags]">
+						</div>
+
+						<div class="form-floating mb-3">
+							<input type="email" name="contact[email]" class="form-control" id="floatingInput" placeholder="example@gmail.com">
+							<label for="floatingInput">Email Address</label>
+						</div>
+
+						<div class="submit">
+							<input type="submit" class="btn btn-primary" value="Sign In">
+						</div>
+					{% endform %}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
