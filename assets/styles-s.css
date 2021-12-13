@@ -90,4 +90,9 @@
 header .icons a {
 	color: white;
 	text-decoration: none;
+}z
+
+.icon-register svg {
+	width: 20px;
+	margin-right: 10px;
 }
