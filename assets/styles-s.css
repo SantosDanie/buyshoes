@@ -1,82 +1,82 @@
 .card img {
-    height: 200px;
-    object-fit: contain;
+	height: 200px;
+	object-fit: contain;
 }
 
 .card {
-    justify-content: center;
+	justify-content: center;
 }
 
 .glider-next, .glider-prev{
-    position: relative;
-    right: 20px;
-    left: 0;
+	position: relative;
+	right: 20px;
+	left: 0;
 }
 
 .buttons {
-    width: fit-content;
-    margin-left: auto;
-    margin-right: 0;
+	width: fit-content;
+	margin-left: auto;
+	margin-right: 0;
 }
 
 .item-slide {
-    padding-left: 15px;
-    padding-right: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 .starts svg {
-    width: 15px;
-    margin-left: 5px;
-    margin-right: 5px;
+	width: 15px;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 .starts {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 .testimonial {
-    text-align: center;
-    padding-left: 15px;
-    padding-right: 15px;
+	text-align: center;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 .testimonial img {
-    height: 100px;
-    max-width: 100px;
-    object-fit: cover;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 5px;
+	height: 100px;
+	max-width: 100px;
+	object-fit: cover;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 5px;
 }
 
 .icon-svg {
-    margin-left: 10px;
-    margin-right: 10px;
-    text-decoration: none;
+	margin-left: 10px;
+	margin-right: 10px;
+	text-decoration: none;
 }
 .icon-svg svg {
-    font-size: 18px;
-    color: gray;
-    width: 30px;
-    height: 30px;
+	font-size: 18px;
+	color: gray;
+	width: 30px;
+	height: 30px;
 }
 
 .footer-menu {
-    padding: 0;
-    margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 .footer-menu li a {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 .article-image {
-    width: 100%;
-    object-fit: cover !important;
+	width: 100%;
+	object-fit: cover !important;
 }
 
 .social-sharing-icons { display: flex; margin-top: 20px; margin-bottom: 20px; }
@@ -84,5 +84,10 @@
 .social-sharing-icons a svg { color: gray; }
 
 .card.card-masory img {
-    height: initial;
+	height: initial;
+}
+
+header .icons a {
+	color: white;
+	text-decoration: none;
 }

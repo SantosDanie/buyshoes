@@ -35,6 +35,17 @@
 				<input type="search" class="form-control me-2" name="q" value="{{ search.terms | escape }}" placeholder="Search" aria-label="Search">
 				<button type="submit" class="btn btn-outline-primary">Search</button>
 			</form>
+			<div class="icons">
+				{% if shop.customer_accounts_enabled %}
+					{% if customer %}
+						<a href="{{ routes.account_url }}">Account</a>
+					{% else %}
+						<a href="{{ routes.account_login_url }}">Login</a>
+						<span>Or</span>
+						<a href="{{ routes.account_register_url }}">Create An Account</a>
+					{% endif %}
+				{% endif %}
+			</div>
 		</div>
 	</div>
 </header>
