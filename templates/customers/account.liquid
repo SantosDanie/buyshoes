@@ -4,76 +4,78 @@
 			<h1>My Account</h1>
 			<p class="icon-register">
 				<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-out-alt" class="svg-inline--fa fa-sign-out-alt fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"></path></svg>
-				<a href="{{ routes.account_logout_url }}">
-					{{ 'customer.log_out' | t }}
-				</a>
+				<a href="{{ routes.account_logout_url }}">Log Out</a>
 			</p>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-12 col-lg-10">
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th scope="col">ORDER</th>
-						<th scope="col">Date</th>
-						<th scope="col">Payment Status</th>
-						<th scope="col">Fulfilment Status</th>
-						<th scope="col">Total</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Jan 2, 2021</td>
-						<td>Paid</td>
-						<td>Unfulfilled</td>
-						<td>200.00 GTQ</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>Jan 2, 2021</td>
-						<td>Paid</td>
-						<td>Unfulfilled</td>
-						<td>200.00 GTQ</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>Jan 2, 2021</td>
-						<td>Paid</td>
-						<td>Unfulfilled</td>
-						<td>200.00 GTQ</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>Jan 2, 2021</td>
-						<td>Paid</td>
-						<td>Unfulfilled</td>
-						<td>200.00 GTQ</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>Jan 2, 2021</td>
-						<td>Paid</td>
-						<td>Unfulfilled</td>
-						<td>200.00 GTQ</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>Jan 2, 2021</td>
-						<td>Paid</td>
-						<td>Unfulfilled</td>
-						<td>200.00 GTQ</td>
-					</tr>
-				</tbody>
-			</table>
+			<h3>Order History</h3>
+			{% paginate customer.orders by 50 %}
+				{%- if customer.orders.size > 0 -%}
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Order</th>
+								<th scope="col">Date</th>
+								<th scope="col">Payment Status</th>
+								<th scope="col">Fulfillment Status</th>
+								<th scope="col">Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for order in customer.orders %}
+								<tr>
+									<th>
+										<a href="{{ order.customer_url }}">{{ order.order_number }} - {{ order.name }}</a>
+									</th>
+									<td>{{ order.created_at | date: "%b %d, %Y" }}</td>
+									<td>{{ order.financial_status_label }}</td>
+									<td>{{ order.fulfillment_status_label }}</td>
+									<td>{{ order.total_price | money_with_currency }}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				{%- else -%}
+					<p>No Orders Yet.</p>
+				{%- endif -%}
+
+				{% if paginate.pages > 1 %}
+					<div class="d-flex justify-content-center mt-5 mb-5">
+						<nav arial-label="Page navigation example">
+							<ul class="pagination">
+								{% if paginate.previus.is_link %}
+									<li class="page-item"><a class="page-link" href="{{ paginate.previous.url }}">previus</a></li>
+								{% else %}
+									<li class="page-item"><span class="page-link">previus</span></li>
+								{% endif %}
+
+								{% for part in paginate.parts %}
+									{% if part.is_link %}
+										<li class="page-item"><a class="page-link" href="{{ part.url }}">{{ part.title }}</a></li>
+									{% else %}
+										<li class="page-item active"><span class="page-link">{{ part.title }}</span></li>
+									{% endif %}
+								{% endfor %}
+
+								{% if paginate.next.is_link %}
+									<li class="page-item"><a class="page-link" href="{{ paginate.next.url }}">Next</a></li>
+								{% else %}
+									<li class="page-item"><span class="page-link">Next</span></li>
+								{% endif %}
+							</ul>
+						</nav>
+					</div>
+				{% endif %}
+			{% endpaginate %}
 		</div>
 		<div class="col-12 col-lg-2">
-			<h4>Order History</h4>
-			<p>Santos Daniel</p>
-			<p>San Martin Jilotepeque, Chimaltenango, Guatemala</p>
-			<p>Guatemala</p>
-			<a href="#0">View Address</a>
+			<h4>Customer Addresses</h4>
+			{{ customer.default_address | format_address }}
+			<a href="{{ routes.account_addresses_url }}">
+				{{ 'View All Addresses' }} ({{ customer.addresses_count }})
+			</a>
 		</div>
 	</div>
 </div>

@@ -1,8 +1,8 @@
 <div class="container pt-5 pb-5">
 	<div class="row pb-5">
 		<div class="col">
-			<h1>My Account</h1>
-			<p class="icon-register">Return To<a href="#0">Account Details</a></p>
+			<h1>{{ 'customer.account.title' | t }}</h1>
+			<p><a href="{{ routes.account_url }}">{{ 'customer.account.return' | t }}</a></p>
 		</div>
 	</div>
 	<div class="row">
@@ -10,56 +10,23 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th scope="col">ORDER</th>
-						<th scope="col">Date</th>
-						<th scope="col">Payment Status</th>
-						<th scope="col">Fulfilment Status</th>
-						<th scope="col">Total</th>
+						<th scope="col">{{ 'customer.order.product' | t }}</th>
+						<th scope="col">{{ 'customer.order.sku' | t }}</th>
+						<th scope="col">{{ 'customer.order.price' | t }}</th>
+						<th scope="col">{{ 'customer.order.quantity' | t }}</th>
+						<th scope="col">{{ 'customer.order.total' | t }}</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Jan 2, 2021</td>
-						<td>Paid</td>
-						<td>Unfulfilled</td>
-						<td>200.00 GTQ</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>Jan 2, 2021</td>
-						<td>Paid</td>
-						<td>Unfulfilled</td>
-						<td>200.00 GTQ</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>Jan 2, 2021</td>
-						<td>Paid</td>
-						<td>Unfulfilled</td>
-						<td>200.00 GTQ</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>Jan 2, 2021</td>
-						<td>Paid</td>
-						<td>Unfulfilled</td>
-						<td>200.00 GTQ</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>Jan 2, 2021</td>
-						<td>Paid</td>
-						<td>Unfulfilled</td>
-						<td>200.00 GTQ</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>Jan 2, 2021</td>
-						<td>Paid</td>
-						<td>Unfulfilled</td>
-						<td>200.00 GTQ</td>
-					</tr>
+					{% for item in order.line_items %}
+						<tr>
+							<th scope="row">1</th>
+							<td>Jan 2, 2021</td>
+							<td>Paid</td>
+							<td>Unfulfilled</td>
+							<td>200.00 GTQ</td>
+						</tr>
+					{% endfor %}
 				</tbody>
 			</table>
 			<table class="table">
@@ -78,11 +45,13 @@
 			</table>
 		</div>
 		<div class="col-12 col-lg-2">
-			<h4>Order History</h4>
-			<p>Santos Daniel</p>
-			<p>San Martin Jilotepeque, Chimaltenango, Guatemala</p>
-			<p>Guatemala</p>
-			<a href="#0">View Address</a>
+			<h2>{{ 'customer.order.billing_address' | t }}</h2>
+			<p><strong>{{ 'customer.order.payment_status' | t }}:</strong>{{ order.financial_status_label }}</p>
+			{{ order.billing_address | format_address }}
+			<hr/>
+			<h2>{{ 'customer.order.shipping_address' | t }}</h2>
+			<p><strong>{{ 'customer.order.fulfillment_status' | t }}:</strong>{{ order.fulfillment_status_label }}</p>
+			{{ order.shipping_address | format_address }}
 		</div>
 	</div>
 </div>
