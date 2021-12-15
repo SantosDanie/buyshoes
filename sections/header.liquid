@@ -31,11 +31,11 @@
 					</ul>
 				</div>
 			</nav>
-			<form action="{{ routes.search_url }}" class="d-flex">
+			<form action="{{ routes.search_url }}" class="d-flex ms-auto">
 				<input type="search" class="form-control me-2" name="q" value="{{ search.terms | escape }}" placeholder="Search" aria-label="Search">
 				<button type="submit" class="btn btn-outline-primary">Search</button>
 			</form>
-			<div class="icons">
+			<div class="icons ms-2">
 				{% if shop.customer_accounts_enabled %}
 					{% if customer %}
 						<a href="{{ routes.account_url }}">Account</a>
