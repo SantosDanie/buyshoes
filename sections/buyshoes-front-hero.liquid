@@ -1,0 +1,161 @@
+<section class="hero-section" style="background: {{ section.settings.bg_section }}; padding: {{ section.settings.padding_tb }}px 0;">
+	<div class="container">
+		<div class="row row-cols-1" style="max-width: {{ section.settings.max_width }}px; margin-left: auto; margin-right: auto;">
+			{% for block in section.blocks %}
+				{% case block.type %}
+					{% when 'image_thumbnail' %}
+						<div class="col pb-2 pt-2">
+							<img style="max-width: 100%;" src="{{ block.settings.image_thumbnail | image_url }}">
+						</div>
+					{% when 'block_title' %}
+						<div class="col pb-2 pt-2">
+							<h1 style="color: {{ section.settings.color_text }};">This is the title</h1>
+						</div>
+					{% when 'block_description' %}
+						<div class="col pb-2 pt-2">
+							<p style="color: {{ section.settings.color_text }};">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa est exercitationem eum sapiente sunt praesentium qui consectetur enim, iure sit voluptatum nobis ex repellendus ratione! Fugiat est quae ut quam!</p>
+						</div>
+				{% endcase %}
+			{% endfor %}
+		</div>
+	</div>
+</section>
+
+{% schema %}
+{
+	"name": "Hero Section",
+	"settings": [
+		{
+			"type": "color_background",
+			"id": "bg_section",
+			"label": "Background Hero Section",
+			"default": "linear-gradient(#fff, #000)"
+		},
+		{
+			"type": "range",
+			"id": "padding_tb",
+			"label": "Padding Top And Bottom",
+			"max": 100,
+			"min": 30,
+			"step": 1,
+			"unit": "px",
+			"default": 50
+		},
+		{
+			"type": "color",
+			"id": "color_text",
+			"label": "Text Color",
+			"default": "#fff"
+		},
+		{
+			"type": "number",
+			"id": "max_width",
+			"label": "Max Width",
+			"default": 1100
+		}
+	],
+	"blocks": [
+		{
+			"name": "Image",
+			"type": "image_thumbnail",
+			"limit": 1,
+			"settings": [
+				{
+					"type": "image_picker",
+					"id": "image",
+					"label": "Select Image"
+				},
+				{
+					"type": "number",
+					"id": "max_image",
+					"label": "Add Number form Max Width",
+					"default": 500
+				},
+				{
+					"type": "select",
+					"id": "position_image",
+					"label": "Select Position Image",
+					"options": [
+						{
+							"value": "justify-content-star",
+							"label": "Left"
+						}, {
+							"value": "justify-content-center",
+							"label": "Center"
+						},
+						{
+							"value": "justify-content-end",
+							"label": "Right"
+						}
+					],
+					"default": "justify-content-center"
+				}
+			]
+		},
+		{
+			"name": "Title",
+			"type": "block_title",
+			"limit": 1,
+			"settings": [
+				{
+					"type": "text",
+					"id": "title_section",
+					"label": "Title Section",
+					"default": "Title Section"
+				},
+				{
+					"type": "select",
+					"id": "text_alignment",
+					"label": "Select Alignment",
+					"options": [
+						{
+							"value": "justify-content-star",
+							"label": "Left"
+						}, {
+							"value": "justify-content-center",
+							"label": "Center"
+						},
+						{
+							"value": "justify-content-end",
+							"label": "Right"
+						}
+					],
+					"default": "justify-content-center"
+				}
+			]
+		},
+		{
+			"name": "Description",
+			"type": "block_description",
+			"limit": 1,
+			"settings": [
+				{
+					"type": "richtext",
+					"id": "description_title",
+					"label": "Description",
+					"default": "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>"
+				},
+				{
+					"type": "select",
+					"id": "text_alignment",
+					"label": "Select Alignment",
+					"options": [
+						{
+							"value": "justify-content-star",
+							"label": "Left"
+						}, {
+							"value": "justify-content-center",
+							"label": "Center"
+						},
+						{
+							"value": "justify-content-end",
+							"label": "Right"
+						}
+					],
+					"default": "justify-content-center"
+				}
+			]
+		}
+	]
+}
+{% endschema %}
