@@ -1,0 +1,10 @@
+{
+	"sections": {
+		"hero_section": {
+			"type": "buyshoes-front-hero"
+		}
+	},
+	"order": [
+		"hero_section"
+	]
+}
