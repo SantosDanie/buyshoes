@@ -1,0 +1,275 @@
+<div class="container">
+	{% if section.blocks.size > 0 %}
+		{% for block in section.blocks %}
+			{% if block.type == 'article_block' %}
+				{% assign item = block.settings.article %}
+				<div class="col-12 col-md-12 mb-4 mt-4">
+					<div class="result border border-danger rounded-3 p-2">
+						<div class="row">
+							<div class="col-12 col-sm-4">
+								<div class="image" style="max-height: 200px; overflow: hidden;">
+									{% if item.object_type == 'article' %}
+										{{ item.image | img_url: 'master' | img_tag: '', "w-100" }}
+									{% elsif item.object_type == 'product' %}
+										{{ item.featured_image | img_url: 'master' | img_tag: '', "w-100" }}
+									{% else %}
+										{{ "image" | placeholder_svg_tag }}
+									{% endif %}
+								</div>
+							</div>
+							<div class="col-12 col-sm-8">
+								<div class="content">
+									{%- assign badge_color = "bg-danger" -%}
+									{% if item.object_type == 'page' %}
+										{%- assign badge_color = "bg-primary" -%}
+									{% elsif item.object_type == 'article' %}
+										{%- assign badge_color = "bg-success" -%}
+									{% endif %}
+									<h5><span class="badge rounded-pill {{ badge_color }}">{{ item.object_type }}</span></h5>
+									<h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+									<p>{{ item.content | strip_html | truncate: 80 }}</p>
+									{% if item.object_type == "product" %}
+										<h4>{{ item.price | money_with_currency }}</h4>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+			{% if block.type == 'blog_block' %}
+				{% assign item = block.settings.blog %}
+				<div class="col-12 col-md-12 mb-4 mt-4">
+					<div class="result border border-danger rounded-3 p-2">
+						<div class="row">
+							<div class="col-12 col-sm-4">
+								<div class="image" style="max-height: 200px; overflow: hidden;">
+									{% if item.object_type == 'article' %}
+										{{ item.image | img_url: 'master' | img_tag: '', "w-100" }}
+									{% elsif item.object_type == 'product' %}
+										{{ item.featured_image | img_url: 'master' | img_tag: '', "w-100" }}
+									{% else %}
+										{{ "image" | placeholder_svg_tag }}
+									{% endif %}
+								</div>
+							</div>
+							<div class="col-12 col-sm-8">
+								<div class="content">
+									{%- assign badge_color = "bg-danger" -%}
+									{% if item.object_type == 'page' %}
+										{%- assign badge_color = "bg-primary" -%}
+									{% elsif item.object_type == 'article' %}
+										{%- assign badge_color = "bg-success" -%}
+									{% endif %}
+									<h5><span class="badge rounded-pill {{ badge_color }}">{{ item.object_type }}</span></h5>
+									<h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+									<p>{{ item.content | strip_html | truncate: 80 }}</p>
+									{% if item.object_type == "product" %}
+										<h4>{{ item.price | money_with_currency }}</h4>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+			{% if block.type == 'html_block' %}
+				<div class="col-12 mt-5 mb-5">
+					<div class="card mb-3">
+						{{ block.settings.html }}
+					</div><!-- /Card -->
+				</div>
+			{% endif %}
+			{% if block.type == 'menus_block' %}
+				<div class="col-12 mt-5 mb-5">
+					<ul class="list-group"">
+						{% for link in block.settings.link_menu.links %}
+							<li class="list-group-item {% if link.links.size > 0 %} dropdown {% endif %}">
+								<a class="nav-link {% if link.links.size > 0 %} dropdown-toggle {% endif %}" href="{{ link.url }}" {% if link.links.size > 0 %} data-bs-toggle="dropdown" {% endif %}>{{ link.title }}</a>
+								{% if link.links.size > 0 %}
+									<ul class=" dropdown-menu">
+										{% for link_child in link.links %}
+											<li class="nav-item"><a class="dropdown-item {% if link_child.links.size > 0 %} dropdown-toggle {% endif %}" href="{{ link_child.url }}">{{ link_child.title }}</a>
+												{% if link_child.links.size > 0 %}
+													<ul class="submenu dropdown-menu">
+														{% for item in link_child.links %}
+															<li><a class="dropdown-item" href="{{ item.url }}">{{ item.title }}</a></li>
+														{% endfor %}
+													</ul>
+												{% endif %}
+											</li>
+										{% endfor %}
+									</ul>
+								{% endif %}
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% endif %}
+			{% if block.type == 'liquid_block' %}
+				<div class="col-12 mt-5 mb-5">
+					{{ block.settings.battery_message }}
+				</div>
+			{% endif %}
+			{% if block.type == 'page_block' %}
+				{% assign item = block.settings.page %}
+				<div class="col-12 col-md-12 mb-4 mt-5">
+					<div class="result border border-danger rounded-3 p-2">
+						<div class="row">
+							<div class="col-12 col-sm-4">
+								<div class="image" style="max-height: 200px; overflow: hidden;">
+									{% if item.object_type == 'article' %}
+										{{ item.image | img_url: 'master' | img_tag: '', "w-100" }}
+									{% elsif item.object_type == 'product' %}
+										{{ item.featured_image | img_url: 'master' | img_tag: '', "w-100" }}
+									{% else %}
+										{{ "image" | placeholder_svg_tag }}
+									{% endif %}
+								</div>
+							</div>
+							<div class="col-12 col-sm-8">
+								<div class="content">
+									{%- assign badge_color = "bg-danger" -%}
+									{% if item.object_type == 'page' %}
+										{%- assign badge_color = "bg-primary" -%}
+									{% elsif item.object_type == 'article' %}
+										{%- assign badge_color = "bg-success" -%}
+									{% endif %}
+									<h5><span class="badge rounded-pill {{ badge_color }}">{{ item.object_type }}</span></h5>
+									<h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+									<p>{{ item.content | strip_html | truncate: 80 }}</p>
+									{% if item.object_type == "product" %}
+										<h4>{{ item.price | money_with_currency }}</h4>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+			{% if block.type == 'url_block' %}
+				<div class="col-12 mt-5 mb-5">
+					<a href="{{ block.settings.button_link }}">Go To Page</a>
+				</div>
+			{% endif %}
+			{% if block.type == 'video_block' %}
+				<div class="col-12 mt-5 mb-5">
+					{% if block.settings.section_video %}
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/{{ block.settings.section_video.id }}" allowfullscreen></iframe>
+					{% endif %}
+				</div>
+			{% endif %}
+			<hr/>
+		{% endfor %}
+	{% endif %}
+</div>
+
+{% schema %}
+{
+	"name": "Section All Fields",
+	"tag": "section",
+	"blocks": [
+		{
+			"name": "Article",
+			"type": "article_block",
+			"limit": 1,
+			"settings": [
+				{
+					"type": "article",
+					"id": "article",
+					"label": "Article"
+				}
+			]
+		},
+		{
+			"name": "Blog",
+			"type": "blog_block",
+			"limit": 1,
+			"settings": [
+				{
+					"type": "blog",
+					"id": "blog",
+					"label": "Blog"
+				}
+			]
+		},
+		{
+			"name": "HTML",
+			"type": "html_block",
+			"limit": 1,
+			"settings": [
+				{
+					"type": "html",
+					"id": "html",
+					"label": "HTML"
+				}
+			]
+		},
+		{
+			"name": "Menus",
+			"type": "menus_block",
+			"limit": 1,
+			"settings": [
+				{
+					"type": "link_list",
+					"id": "link_menu",
+					"label": "Menus"
+				}
+			]
+		},
+		{
+			"name": "Liquid",
+			"type": "liquid_block",
+			"limit": 1,
+			"settings": [
+				{
+					"type": "liquid",
+					"id": "battery_message",
+					"label": "Battery message",
+					"default": "This product can be shipped by ground or air."
+				}
+			]
+		},
+		{
+			"name": "Page",
+			"type": "page_block",
+			"limit": 1,
+			"settings": [
+				{
+					"type": "page",
+					"id": "page",
+					"label": "Page"
+				}
+			]
+		},
+		{
+			"name": "URl",
+			"type": "url_block",
+			"limit": 1,
+			"settings": [
+				{
+					"type": "url",
+					"id": "button_link",
+					"label": "Button link"
+				}
+			]
+		},
+		{
+			"name": "Video",
+			"type": "video_block",
+			"limit": 1,
+			"settings": [
+				{
+					"type": "video_url",
+					"id": "section_video",
+					"label": "Product description video",
+					"accept": [
+						"youtube",
+						"vimeo"
+					]
+				}
+			]
+		}
+	]
+}
+{% endschema %}

@@ -2,9 +2,13 @@
 	"sections": {
 		"hero_section": {
 			"type": "buyshoes-front-hero"
+		},
+		"main": {
+			"type": "buyshoes-front-main"
 		}
 	},
 	"order": [
-		"hero_section"
+		"hero_section",
+		"main"
 	]
 }

@@ -4,16 +4,18 @@
 			{% for block in section.blocks %}
 				{% case block.type %}
 					{% when 'image_thumbnail' %}
-						<div class="col pb-2 pt-2">
-							<img style="max-width: 100%;" src="{{ block.settings.image_thumbnail | image_url }}">
-						</div>
+						{% if block.settings.image %}
+							<div class="col pb-2 pt-2 d-flex {{ block.settings.position_image }}">
+								<img style="max-width: 100%; width: {{ block.settings.max_image }}px;" src="{{ block.settings.image | img_url: 'master' }}">
+							</div>
+						{% endif %}
 					{% when 'block_title' %}
-						<div class="col pb-2 pt-2">
-							<h1 style="color: {{ section.settings.color_text }};">This is the title</h1>
+						<div class="col pb-2 pt-2 d-flex {{ block.settings.text_alignment }}">
+							<h1 class="ff-text" style="color: {{ section.settings.color_text }}; font-family: {{ section.settings.heading_font.fallback_families }};">This is the title</h1>
 						</div>
 					{% when 'block_description' %}
 						<div class="col pb-2 pt-2">
-							<p style="color: {{ section.settings.color_text }};">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa est exercitationem eum sapiente sunt praesentium qui consectetur enim, iure sit voluptatum nobis ex repellendus ratione! Fugiat est quae ut quam!</p>
+							<p class="ff-text {{ block.settings.alignment }}" style="color: {{ section.settings.color_text }}; font-family: {{ section.settings.heading_font.fallback_families }};">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa est exercitationem eum sapiente sunt praesentium qui consectetur enim, iure sit voluptatum nobis ex repellendus ratione! Fugiat est quae ut quam!</p>
 						</div>
 				{% endcase %}
 			{% endfor %}
@@ -52,6 +54,12 @@
 			"id": "max_width",
 			"label": "Max Width",
 			"default": 1100
+		},
+		{
+			"type": "font_picker",
+			"id": "heading_font",
+			"label": "Heading font",
+			"default": "helvetica_n4"
 		}
 	],
 	"blocks": [
@@ -137,22 +145,22 @@
 				},
 				{
 					"type": "select",
-					"id": "text_alignment",
+					"id": "alignment",
 					"label": "Select Alignment",
 					"options": [
 						{
-							"value": "justify-content-star",
+							"value": "text-start",
 							"label": "Left"
 						}, {
-							"value": "justify-content-center",
+							"value": "text-center",
 							"label": "Center"
 						},
 						{
-							"value": "justify-content-end",
+							"value": "text-end",
 							"label": "Right"
 						}
 					],
-					"default": "justify-content-center"
+					"default": "text-center"
 				}
 			]
 		}
