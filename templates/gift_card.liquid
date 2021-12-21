@@ -102,7 +102,7 @@
 			{% endif %}
 
 			<h5>This card expires on: {{ gift_card.expires_on | data: "%b %d %Y" }}</h5>
-			<h5>Balance:  {{ gift_card.balance | | money_with_currency }}</h5>
+			<h5>Balance:  {{ gift_card.balance | money_with_currency }}</h5>
 
 			{% if gift_card.expired %}
 				<h5>This card already expired</h5>
