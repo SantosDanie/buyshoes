@@ -1,7 +1,7 @@
 <section>
 	<div class="container">
 		<div class="row">
-			<div class="col-12 pt-5 pb5">
+			<div class="col-12 pt-5 pb-3">
 				<div class="heading">
 					<h1>My Address</h1>
 					<p class="mb-4"><a href="{{ routes.account_url }}">Return to Account Details</a></p>
@@ -80,10 +80,9 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
-			<div class="col-12 col-md-10 mx-auto">
+			<div class="col-12 col-md-12 pb-5">
 				<div class="row">
 					{% paginate customer.addresses by 8 %}
 						{% for address in customer.addresses %}
@@ -96,10 +95,7 @@
 										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editAddressModal-{{ forloop.index }}">
 											Edit Address
 										</button>
-										<form method="POST" action="/account/address/{{ address.id }}">
-											<input type="hidden" name="_method" value="delete">
-											<button type="submit" class="btn btn-sm btn-danger">Delete Address</button>
-										</form>
+										<button class="btn btn-sm btn-danger" class="open-delete-modal" data-action="/account/address/{{ address.id }}">Delete Address</button>
 									</div>
 								</div>
 							</div>
@@ -180,3 +176,32 @@
 		</div>
 	</div>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="delete_address_modal" tabindex="-1" aria-labelledby="delete_address_modal_label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+				<form method="POST" action="" id="delete_address">
+					<input type="hidden" name="_method" value="delete">
+					<button type="submit" class="btn btn-sm btn-danger">Yes</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	document.querySelector('.open-delete-modal').addEventListener('click', function() {
+		var action = document.querySelector(this).dataset.action; 
+		document.querySelector('#delete_address').action = action;
+
+		var myModal = new bootstrap.Modal(document.querySelector("#delete_address_modal"));
+		myModal.show();
+	});
+</script>
