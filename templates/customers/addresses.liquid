@@ -95,7 +95,10 @@
 										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editAddressModal-{{ forloop.index }}">
 											Edit Address
 										</button>
-										<button class="btn btn-sm btn-danger open-delete-modal" data-action="/account/address/{{ address.id }}">Delete Address</button>
+										<form method="POST" action="/account/address/{{ address.id }}" id="delete_address">
+											<input type="hidden" name="_method" value="delete">
+											<button type="submit" class="btn btn-sm btn-danger">Delete Address</button>
+										</form>
 									</div>
 								</div>
 							</div>
@@ -187,21 +190,12 @@
 			</div>
 			<div class="modal-body">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-				<form method="POST" action="" id="delete_address">
-					<input type="hidden" name="_method" value="delete">
-					<button type="submit" class="btn btn-sm btn-danger">Yes</button>
-				</form>
 			</div>
 		</div>
 	</div>
 </div>
 
 <script>
-	document.querySelector('.open-delete-modal').addEventListener('click', function() {
-		var action = document.querySelector(this).dataset.action; 
-		document.querySelector('#delete_address').action = action;
-
-		var myModal = new bootstrap.Modal(document.querySelector("#delete_address_modal"));
-		myModal.show();
-	});
+	var myModal = new bootstrap.Modal(document.querySelector("#delete_address_modal"));
+	myModal.show();
 </script>
