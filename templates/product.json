@@ -1,10 +1,14 @@
 {
   "sections": {
     "main": {
-      "type": "product"
+      "type": "product",
+      "settings": {
+      }
     },
     "recomended": {
-      "type": "buyshoes-recomended"
+      "type": "buyshoes-recomended",
+      "settings": {
+      }
     }
   },
   "order": [
