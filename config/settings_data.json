@@ -1,5 +1,76 @@
 {
-  "current": "Default",
+  "current": {
+    "colors_solid_button_labels": "#FFFFFF",
+    "colors_accent_1": "#121212",
+    "colors_accent_2": "#334FB4",
+    "colors_text": "#121212",
+    "colors_outline_button_labels": "#121212",
+    "colors_background_1": "#FFFFFF",
+    "colors_background_2": "#F3F3F3",
+    "type_header_font": "assistant_n4",
+    "type_body_font": "assistant_n4",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "blocks": {
+          "announcement-bar-0": {
+            "type": "announcement",
+            "settings": {
+              "text": "Welcome to our store",
+              "color_scheme": "background-1",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "announcement-bar-0"
+        ],
+        "settings": {
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "e4fcfe40-1981-4068-977b-bc1bec2bd963": {
+            "type": "text_block",
+            "settings": {
+              "title_heading": "Heading Text",
+              "content_text": "<p>This is an example for this content.<\/p>"
+            }
+          },
+          "e925a09b-50cd-43b1-b90f-64f810b1ff66": {
+            "type": "footer_menu",
+            "settings": {
+              "heading": "Menu Title",
+              "menu": "main-menu"
+            }
+          },
+          "92225bfa-38e7-4f0d-842e-bbb8b0da00b7": {
+            "type": "footer_menu",
+            "settings": {
+              "heading": "Menu Title",
+              "menu": "main-menu"
+            }
+          }
+        },
+        "block_order": [
+          "e4fcfe40-1981-4068-977b-bc1bec2bd963",
+          "e925a09b-50cd-43b1-b90f-64f810b1ff66",
+          "92225bfa-38e7-4f0d-842e-bbb8b0da00b7"
+        ],
+        "settings": {
+        }
+      }
+    },
+    "content_for_index": [
+
+    ]
+  },
   "presets": {
     "Default": {
       "colors_solid_button_labels": "#FFFFFF",
@@ -24,7 +95,9 @@
           },
           "block_order": [
             "announcement-bar-0"
-          ]
+          ],
+          "settings": {
+          }
         }
       }
     },
@@ -41,21 +114,25 @@
       "sections": {
         "footer": {
           "type": "footer",
-          "settings": {
-            "color_scheme": "accent-1"
-          },
           "blocks": {
             "menu": {
-              "type": "link_list"
+              "type": "link_list",
+              "settings": {
+              }
             },
             "text": {
-              "type": "text"
+              "type": "text",
+              "settings": {
+              }
             }
           },
           "block_order": [
             "menu",
             "text"
-          ]
+          ],
+          "settings": {
+            "color_scheme": "accent-1"
+          }
         }
       }
     }
