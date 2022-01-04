@@ -1,7 +1,7 @@
-<header class="bg-dark">
+<header>
 	<div class="container">
 		<div class="d-flex flex-wrap align-items-center justify-content-between">
-			<nav class="navbar navbar-expand-lg navbar-dark">
+			<nav class="navbar navbar-expand-lg navbar-light">
 				<a class="navbar-brand" href="#">Brand</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"  aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -38,11 +38,11 @@
 			<div class="icons ms-2">
 				{% if shop.customer_accounts_enabled %}
 					{% if customer %}
-						<a href="{{ routes.account_url }}">Account</a>
+						<a class="text-darck" href="{{ routes.account_url }}">Account</a>
 					{% else %}
-						<a href="{{ routes.account_login_url }}">Login</a>
+						<a class="text-darck" href="{{ routes.account_login_url }}">Login</a>
 						<span>Or</span>
-						<a href="{{ routes.account_register_url }}">Create An Account</a>
+						<a class="text-darck" href="{{ routes.account_register_url }}">Create An Account</a>
 					{% endif %}
 				{% endif %}
 			</div>

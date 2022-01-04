@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../scss/style-theme.scss"
+    ],
+    "names": [],
+    "file": "style-theme.css"
+}
