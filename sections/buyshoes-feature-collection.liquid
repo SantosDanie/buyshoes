@@ -3,18 +3,7 @@
 	<div class="row {% if section.settings.collections_type == "slider" %} d-none {% endif %}">
 		{% for product in collections[section.settings.feature_collection].products %}
 			<div class="col-3 py-3">
-				<div class="card">
-					{% if product.featured_image != blank %}
-						{{ product.featured_image | img_url: "master" | img_tag }}
-					{% else %}
-						{{ 'product-1' | placeholder_svg_tag: 'd-block w-100' }}
-					{% endif %}
-					<div class="card-body">
-						<h3>{{ product.price }} GTQ</h3>
-						<h5 class="card-title">{{ product.title }}</h5>
-						<a href="{{ product.url }}" class="btn btn-primary">View Product</a>
-					</div>
-				</div>
+				{% render 'buyshoues-card-product' product: product %}
 			</div>
 		{% endfor %}
 	</div>
@@ -27,18 +16,7 @@
 		<div class="glider">
 			{% for product in collections[section.settings.feature_collection].products %}
 				<div class="item-slide">
-					<div class="card">
-						{% if product.featured_image != blank %}
-							{{ product.featured_image | img_url: "master" | img_tag }}
-						{% else %}
-							{{ 'product-1' | placeholder_svg_tag: 'd-block w-100' }}
-						{% endif %}
-						<div class="card-body">
-							<h3>{{ product.price }} GTQ</h3>
-							<h5 class="card-title">{{ product.title }}</h5>
-							<a href="{{ product.url }}" class="btn btn-primary">View Product</a>
-						</div>
-					</div>
+					{% render 'buyshoues-card-product' product: product %}
 				</div>
 			{% endfor %}
 		</div>

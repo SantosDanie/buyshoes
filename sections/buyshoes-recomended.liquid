@@ -8,18 +8,7 @@
 			{% if recommendations.performed and recommendations.products_count > 0 %}
 				{% for product in recommendations.products %}
 					<div class="slider-item">
-						<div class="card">
-							{% if product.featured_image != blank %}
-								{{ product.featured_image | img_url: "master" | img_tag: '', 'w-100' }}
-							{% else %}
-								{{ 'product-1' | placeholder_svg_tag: 'd-block w-100' }}
-							{% endif %}
-							<div class="card-body">
-								<h3>{{ product.price | money_with_currency }}</h3>
-								<h5 class="card-title">{{ product.title }}</h5>
-								<a href="{{ product.url }}" class="btn btn-primary">View Product</a>
-							</div>
-						</div>
+						{% render 'buyshoues-card-product' product: product %}
 					</div>
 				{% endfor %}
 			{% endif %}

@@ -109,6 +109,7 @@
     {{ 'bootstrap.min.js' | asset_url | script_tag }}
     {{ 'lightbox-plus-jquery.js' | asset_url | script_tag }}
     {{ 'glider.min.js' | asset_url | script_tag }}
+    {{ "script-page.js" | asset_url | script_tag }}
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
       {%- endif -%}

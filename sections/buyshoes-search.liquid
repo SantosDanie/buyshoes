@@ -59,33 +59,7 @@
 							</div>
 						{% endfor %}
 
-						{% if paginate.pages > 1 %}
-							<div class="collection-pagination d-flex justify-content-center mt-5 mb-5">
-								<nav arial-label="Page navigation example">
-									<ul class="pagination">
-										{% if paginate.previus.is_link %}
-											<li class="page-item"><a class="page-link" href="{{ paginate.previous.url }}">previus</a></li>
-										{% else %}
-											<li class="page-item"><span class="page-link">previus</span></li>
-										{% endif %}
-
-										{% for part in paginate.parts %}
-											{% if part.is_link %}
-												<li class="page-item"><a class="page-link" href="{{ part.url }}">{{ part.title }}</a></li>
-											{% else %}
-												<li class="page-item active"><span class="page-link">{{ part.title }}</span></li>
-											{% endif %}
-										{% endfor %}
-
-										{% if paginate.next.is_link %}
-											<li class="page-item"><a class="page-link" href="{{ paginate.next.url }}">Next</a></li>
-										{% else %}
-											<li class="page-item"><span class="page-link">Next</span></li>
-										{% endif %}
-									</ul>
-								</nav>
-							</div>
-						{% endif %}
+						{% render 'buyshoes-paginate' paginate: paginate %}
 					{% endpaginate %}
 				</div>
 			</div>

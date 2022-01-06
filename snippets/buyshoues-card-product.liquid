@@ -1,0 +1,12 @@
+<div class="card">
+	{% if product.featured_image != blank %}
+		{{ product.featured_image | img_url: "master" | img_tag }}
+	{% else %}
+		{{ 'product-1' | placeholder_svg_tag: 'd-block w-100' }}
+	{% endif %}
+	<div class="card-body">
+		<h3>{{ product.price | money_with_currency }}</h3>
+		<h5 class="card-title">{{ product.title }}</h5>
+		<a href="#0" class="btn-product-modal-info btn btn-primary" data-handle="{{ product.handle }}.js" data-price="{{ product.price | money_with_currency }}">View Product</a>
+	</div>
+</div>
