@@ -1,14 +1,18 @@
 {
-	"sections": {
-		"main_items": {
-			"type": "buyshoes-card"
-		},
-		"recomended": {
-			"type": "buyshoes-recomended"
-		}
-	},
-	"order": [
-		"main_items",
-		"recomended"
-	]
+  "sections": {
+    "main_items": {
+      "type": "buyshoes-card",
+      "settings": {
+      }
+    },
+    "recomended": {
+      "type": "buyshoes-recomended",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main_items",
+    "recomended"
+  ]
 }

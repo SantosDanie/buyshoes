@@ -1,7 +1,9 @@
 {
   "sections": {
     "main": {
-      "type": "buyshoes-main-404"
+      "type": "buyshoes-main-404",
+      "settings": {
+      }
     }
   },
   "order": [
