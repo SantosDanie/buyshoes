@@ -40,11 +40,35 @@ document.querySelector('#button_add_to_cart').addEventListener('click', function
 	})
 	.then(response => response.json())
 	.then(data => {
+		let container = document.querySelector('#show_alerts');
+		let danger_alert = '';
+		let success_alert = '';
 		if(data.status == 422) {
-
+			danger_alert = '<div class="toast show bg-danger" role="alert" aria-live="assertive" aria-atomic="true">';
+			danger_alert += '<div class="toast-header">';
+			danger_alert += '<strong class="me-auto">Error</strong>';
+			danger_alert += '<small class="text-muted">Just Now</small>';
+			danger_alert += '<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>';
+			danger_alert += '</div>';
+			danger_alert += '<div class="toast-body">';
+			danger_alert += 'Error? You have an Error!';
+			danger_alert += '</div>';
+			danger_alert += '</div>';
 		} else {
-			
+			card_product_count();
+			success_alert = '<div class="toast show bg-success" role="alert" aria-live="assertive" aria-atomic="true">';
+			success_alert += '<div class="toast-header">';
+			success_alert += '<strong class="me-auto">Success</strong>';
+			success_alert += '<small class="text-muted">Just Now</small>';
+			success_alert += '<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>';
+			success_alert += '</div>';
+			success_alert += '<div class="toast-body">';
+			success_alert += 'Success? You have successfully added it!';
+			success_alert += '</div>';
+			success_alert += '</div>';
 		}
+
+		container.innerHTML = danger_alert + success_alert;
 	})
 	.catch((error) => { console.error('Error:', error); });
 });
@@ -74,5 +98,14 @@ for (let i = 0; i < btnsIncrease.length; i++) {
 	let btnIncrease = btnsIncrease[i];
 	btnIncrease.addEventListener('click', function() {
 		btnIncrease.previousElementSibling.value = parseInt(btnIncrease.previousElementSibling.value) + 1;
+	});
+}
+
+card_product_count();
+function card_product_count() {
+	fetch('/cart.js')
+	.then(response => response.json())
+	.then(data => {
+		document.querySelector('#card_product_count').innerHTML = data.items.length 
 	});
 }
